@@ -42,6 +42,28 @@ public static void leerCliente(){
     }
 }
 
+public static void leerBuscarCliente(){
+    if(clientes.isEmpty()){
+        System.out.println("ta vacio");
+        return;
+    };
+    System.out.println("_______Lector y buscador de clientes______");
+    System.out.println("ingrese la cedula del cliente a buscar");
+    int idCliente= sc.nextInt();
+    sc.nextLine();
+
+    int encontrado=0;
+    for(Cliente cliente : clientes){
+        if(cliente.getCedula()==(idCliente)){
+            System.out.println(cliente);
+            encontrado=1;
+            break;
+        }
+    }
+    if (encontrado==0){
+        System.out.println("no se encontro el cliente, por favor creeelo");
+    }
+}
 
 
 
