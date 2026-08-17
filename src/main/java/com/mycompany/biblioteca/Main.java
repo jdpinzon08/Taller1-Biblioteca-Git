@@ -30,7 +30,7 @@ public static void crearCliente(){
     clientes.add(cliente);
     System.out.println("_______________cliente registrado_______________");
 }
-
+//leer
 public static void leerCliente(){
     if(clientes.isEmpty()){
         System.out.println("ta vacio");
@@ -41,12 +41,12 @@ public static void leerCliente(){
         System.out.println((i + 1) + " - " + cliente);
     }
 }
-
+//leer y buscar
 public static void leerBuscarCliente(){
     if(clientes.isEmpty()){
         System.out.println("ta vacio");
         return;
-    };
+    }
     System.out.println("_______Lector y buscador de clientes______");
     System.out.println("ingrese la cedula del cliente a buscar");
     int idCliente= sc.nextInt();
@@ -64,24 +64,28 @@ public static void leerBuscarCliente(){
         System.out.println("no se encontro el cliente, por favor creeelo");
     }
 }
+//actualizar el cliente
+public static void actualizar(){
 
-
-
-//listar 
-public static void listarCliente(){
-    for (Cliente cliente : clientes){
-        System.out.println(cliente);
+ if(clientes.isEmpty()){
+        System.out.println("ta vacio");
+        return;
     }
-}
+    System.out.println("escriba la cedula del cliente a actualizar");
+    int idCliente =sc.nextInt();
+    sc.nextLine();
 
-//busqueda
-public static Cliente buscarCliente(String nombre) {
-    for (Cliente cliente : clientes) {
-        if (cliente.getNombre().equalsIgnoreCase(nombre)) {
-            return cliente;
+    for(Cliente cliente : clientes){
+         if(cliente.getCedula()==(idCliente)){
+            System.out.println("escriba la correccion del nombre");
+            String nombre = sc.nextLine();
+            cliente.setNombre(nombre);
+            System.out.println("se hizo el cambio correctamente");
+            break;
         }
     }
-    return null;
+    System.out.println("no se encontro a dicho cliente");
+
 }
 
 
