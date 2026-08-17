@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 
+//arreglos y eso
 static ArrayList<Cliente> clientes = new ArrayList<>();
 static Scanner sc = new Scanner(System.in);
 
@@ -15,6 +16,8 @@ public static void main(String[] args) {
 }
 
 //metodos pal cliente______________________________
+
+//crear
 public static void crearCliente(){
     System.out.println("ingrese los datos necesitados:");
     System.out.println("ingrese el numero de cedula: ");
@@ -27,6 +30,20 @@ public static void crearCliente(){
     clientes.add(cliente);
     System.out.println("_______________cliente registrado_______________");
 }
+
+public static void leerCliente(){
+    if(clientes.isEmpty()){
+        System.out.println("ta vacio");
+        return;
+    }
+    for(int i=0; i <clientes.size(); i++){
+        Cliente cliente =clientes.get(i);
+        System.out.println((i + 1) + " - " + cliente);
+    }
+}
+
+
+
 
 //listar 
 public static void listarCliente(){
