@@ -85,8 +85,25 @@ public static void actualizar(){
         }
     }
     System.out.println("no se encontro a dicho cliente");
-
 }
+//eliminador de clientes
+public static void borrarCliente(){
+    if(clientes.isEmpty()){
+        System.out.println("ta vacio");
+        return;
+    }
+    System.out.println("escriba la cedula del cliente a actualizar");
+    int idCliente =sc.nextInt();
+    sc.nextLine();
+
+    for(int i = 0; i < clientes.size(); i++){
+        if(clientes.get(i).getCedula()==idCliente){
+            clientes.remove(i);
+            break;
+        }
+    }
+}
+
 
 
 
