@@ -12,7 +12,7 @@ private static Scanner sc = new Scanner(System.in);
 public static void main(String[] args) {
     
 }
-
+//agregar libro
 public static void agregarLibro() {
         System.out.println("_____AGREGAR LIBRO_____");
         System.out.print("escriba el nombre: ");
@@ -26,17 +26,29 @@ public static void agregarLibro() {
         listaL.add(nuevoLibro);
         System.out.println("Libro agregado exitosamente");
     }
-
-    public static void leerLibro(){
-        if(listaL.isEmpty()){
-            System.out.println("la lista esta vacia, ingrese algo primero");
+// leer 
+public static void leerLibro(){
+    if(listaL.isEmpty()){
+        System.out.println("la lista esta vacia, ingrese algo primero");
         }
-        for(Material libro : listaL){
+    for(Material libro : listaL){
             System.out.println(libro);
         }
     }
 
+//buscar
+ public static void buscar(){
+    System.out.println("escriba el codigo del libro a buscar");
+    String cod = sc.nextLine();
+    for (Material libro : listaL) {
+        if(libro.getCodigo().equals(cod)){
+            System.out.println("libro encontrado");
+            System.out.println(libro);
+            return;
+        }
+    }
+    System.out.println("no se encontro el libro");
+ }
 
 
-    
 }
