@@ -50,5 +50,43 @@ public static void leerLibro(){
     System.out.println("no se encontro el libro");
  }
 
+//actualizar
+public static void actualizarL(){
+    System.out.println("_____actualizar libro_____");
+    System.out.println("ingrese el codigo del libro que desea actualizar");
+    String lib = sc.nextLine();
+    if(listaL.isEmpty()){
+        System.out.println("la lista esta vacia, ingrese un material primero");
+    }
+    for(Material libro : listaL){
+        if(libro.getCodigo().equalsIgnoreCase(lib)){
+            System.out.println("ingrese el nuevo nombre del libro");
+            libro.setNombre(sc.nextLine());
+            System.out.println("ingrese el nuevo codigo del libro");
+            libro.setCodigo(sc.nextLine());
+            System.out.println("ingrese el nuevo autor del libro");
+            libro.setAutor(sc.nextLine());
+            System.out.println("libro actualizado :D");
+            return;
+        }
+    }
+    System.out.println("el libro no fue encontrado");
+}
+//eliminar libro 
+public static void eliminarLibro(){
+    System.out.println("_______eliminar un libro_______");
+    System.out.println("ingrese el codigo del libro a eliminar");
+    String elim =sc.nextLine();
+
+    for(int i = 0; i < listaL.size(); i++){
+        if(listaL.get(i).getCodigo().equalsIgnoreCase(elim)){
+            listaL.remove(i);
+            System.out.println("libro eliminado con exito");
+            return;
+        }
+    }
+    System.out.println("libro no encontrado ");
+}
+
 
 }
