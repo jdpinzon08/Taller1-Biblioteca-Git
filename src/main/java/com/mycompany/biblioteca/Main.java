@@ -5,10 +5,15 @@ import java.util.Scanner;
 
 
 public class Main {
+
+//escanner
+private static Scanner sc = new Scanner(System.in); 
+//arreglos libros
 private static ArrayList<Material> listaL = new ArrayList<>();
-private static Scanner sc = new Scanner(System.in);
-//arreglos y eso
+//arreglos clientes
 static ArrayList<Cliente> clientes = new ArrayList<>();
+//prestamos
+static ArrayList<Prestamo> prestamos = new ArrayList<>();
 
 public static void main(String[] args) {
     
@@ -198,5 +203,74 @@ public static void borrarCliente(){
         }
     }
 }
+
+//________________________métodos para préstamos________________________
+
+// Crear préstamo
+public static void crearPrestamo() {
+    System.out.println("_____crear prestamo_____");
+
+    if(clientes.isEmpty()){
+        System.out.println("ta vacio");
+        return;
+    }
+    
+    //pedir id del préstamo
+    System.out.print("ingrese el ID o codigo del prestamo: ");
+    String idPrestamo = sc.nextLine();
+
+    //buscar cliente
+    System.out.print("ingrese la cedula del cliente: ");
+    int idCliente = sc.nextInt();
+    sc.nextLine(); 
+
+    Cliente clienteEncontrado = null;
+    for (Cliente cliente : clientes) {
+        if (cliente.getCedula() == idCliente) {
+            clienteEncontrado = cliente;
+            break;
+        }
+    }
+
+    if (clienteEncontrado == null) {
+        System.out.println("no se encontro el cliente, creelo primero.");
+        return;
+    }
+
+    //buscar
+    System.out.print("ingrese el codigo del libro a prestar: ");
+    String codLibro = sc.nextLine();
+
+    Libro libroEncontrado = null;
+    for (Material mat : listaL) {
+        if (mat.getCodigo().equalsIgnoreCase(codLibro)) {
+            if (mat instanceof Libro) {
+                libroEncontrado = (Libro) mat;
+            }
+            break;
+        }
+    }
+
+    if (libroEncontrado == null) {
+        System.out.println("No se encontró el libro.");
+        return;
+    }
+
+    //fecha y estado
+    java.time.LocalDate fecha = java.time.LocalDate.now();
+    String estado = "Activo";
+
+    // 5. Instanciar y guardar préstamo
+    Prestamo nuevoPrestamo = new Prestamo(idPrestamo, clienteEncontrado, libroEncontrado, fecha, estado);
+    prestamos.add(nuevoPrestamo);
+
+    System.out.println("_______________préstamo registrado_______________");
+}
+
+
+
+
+
+
 
 }
