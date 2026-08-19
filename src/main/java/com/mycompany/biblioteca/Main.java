@@ -268,7 +268,37 @@ public static void crearPrestamo() {
 }
 
 
+//registrar devolucion de prestamo
+public static void devolucion() {
+    if (prestamos.isEmpty()) {
+        System.out.println("No hay prestamos registrados.");
+        return;
+    }
 
+    System.out.println("_____DEVOLUCIÓN DE LIBRO_____");
+    System.out.print("Ingrese el ID del préstamo a devolver: ");
+    String idBusqueda = sc.nextLine();
+
+    for (Prestamo p : prestamos) {
+        //buscar
+        if (p.getIdPrestamo().equalsIgnoreCase(idBusqueda)) {
+            
+            //verificamos si ya estaba devuelto para evitar repetir
+            if (p.getEstado().equalsIgnoreCase("devuelto")) {
+                System.out.println("este prestamo ya se marco devuelto");
+                return;
+            }
+
+            //cambiamos el estado a Devuelto
+            p.setEstado("devuelto");
+            System.out.println("devolución registrada con exito");
+            System.out.println("el libro '" + p.getLibro().getNombre() + "' ha sido devuelto por " + p.getCliente().getNombre());
+            return;
+        }
+    }
+
+    System.out.println("no se encontro ningun prestamo con ese id");
+}
 
 
 
