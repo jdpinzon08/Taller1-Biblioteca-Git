@@ -5,10 +5,15 @@ import java.util.Scanner;
 
 
 public class Main {
+
+//escanner
+private static Scanner sc = new Scanner(System.in); 
+//arreglos libros
 private static ArrayList<Material> listaL = new ArrayList<>();
-private static Scanner sc = new Scanner(System.in);
-//arreglos y eso
+//arreglos clientes
 static ArrayList<Cliente> clientes = new ArrayList<>();
+//prestamos
+static ArrayList<Prestamo> prestamos = new ArrayList<>();
 
 public static void main(String[] args) {
     
@@ -198,5 +203,116 @@ public static void borrarCliente(){
         }
     }
 }
+
+//________________________métodos para préstamos________________________
+
+// Crear préstamo
+public static void crearPrestamo() {
+    System.out.println("_____crear prestamo_____");
+
+    if(clientes.isEmpty()){
+        System.out.println("ta vacio");
+        return;
+    }
+    
+    //pedir id del préstamo
+    System.out.print("ingrese el ID o codigo del prestamo: ");
+    String idPrestamo = sc.nextLine();
+
+    //buscar cliente
+    System.out.print("ingrese la cedula del cliente: ");
+    int idCliente = sc.nextInt();
+    sc.nextLine(); 
+
+    Cliente clienteEncontrado = null;
+    for (Cliente cliente : clientes) {
+        if (cliente.getCedula() == idCliente) {
+            clienteEncontrado = cliente;
+            break;
+        }
+    }
+
+    if (clienteEncontrado == null) {
+        System.out.println("no se encontro el cliente, creelo primero.");
+        return;
+    }
+
+    //buscar
+    System.out.print("ingrese el codigo del libro a prestar: ");
+    String codLibro = sc.nextLine();
+
+    Libro libroEncontrado = null;
+    for (Material mat : listaL) {
+        if (mat.getCodigo().equalsIgnoreCase(codLibro)) {
+            if (mat instanceof Libro) {
+                libroEncontrado = (Libro) mat;
+            }
+            break;
+        }
+    }
+
+    if (libroEncontrado == null) {
+        System.out.println("No se encontró el libro.");
+        return;
+    }
+
+    //fecha y estado
+    java.time.LocalDate fecha = java.time.LocalDate.now();
+    String estado = "Activo";
+
+    // 5. Instanciar y guardar préstamo
+    Prestamo nuevoPrestamo = new Prestamo(idPrestamo, clienteEncontrado, libroEncontrado, fecha, estado);
+    prestamos.add(nuevoPrestamo);
+
+    System.out.println("_______________préstamo registrado_______________");
+}
+
+
+//registrar devolucion de prestamo
+public static void devolucion() {
+    if (prestamos.isEmpty()) {
+        System.out.println("No hay prestamos registrados.");
+        return;
+    }
+
+    System.out.println("_____DEVOLUCIÓN DE LIBRO_____");
+    System.out.print("Ingrese el ID del préstamo a devolver: ");
+    String idBusqueda = sc.nextLine();
+
+    for (Prestamo p : prestamos) {
+        //buscar
+        if (p.getIdPrestamo().equalsIgnoreCase(idBusqueda)) {
+            
+            //verificamos si ya estaba devuelto para evitar repetir
+            if (p.getEstado().equalsIgnoreCase("devuelto")) {
+                System.out.println("este prestamo ya se marco devuelto");
+                return;
+            }
+
+            //cambiamos el estado a Devuelto
+            p.setEstado("devuelto");
+            System.out.println("devolución registrada con exito");
+            System.out.println("el libro '" + p.getLibro().getNombre() + "' ha sido devuelto por " + p.getCliente().getNombre());
+            return;
+        }
+    }
+
+    System.out.println("no se encontro ningun prestamo con ese id");
+}
+
+//listar todos los prestamos
+public static void listarPrestamos() {
+    if (prestamos.isEmpty()) {
+        System.out.println("ta vacio, no hay prestamos registrados");
+        return;
+    }
+
+    System.out.println("_____lista de prestamo_____");
+    for (int i = 0; i < prestamos.size(); i++) {
+        Prestamo p = prestamos.get(i);
+        System.out.println((i + 1) + "ID: " + p.getIdPrestamo() + " Cliente: " + p.getCliente().getNombre() + " Libro: " + p.getLibro().getNombre() + " Fecha: " + p.getFecha() + " Estado: " + p.getEstado());
+    }
+}
+
 
 }
