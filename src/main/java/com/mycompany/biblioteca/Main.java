@@ -16,7 +16,86 @@ static ArrayList<Cliente> clientes = new ArrayList<>();
 static ArrayList<Prestamo> prestamos = new ArrayList<>();
 
 public static void main(String[] args) {
-    
+    int opcion = 0;
+
+    do {
+        System.out.println("____________sistema de biblioteca____________");
+        System.out.println("____________apartado de libros____________");
+        System.out.println("1. Agregar libro");
+        System.out.println("2. Leer/Mostrar libros");
+        System.out.println("3. Buscar libro");
+        System.out.println("4. Actualizar libro");
+        System.out.println("5. Eliminar libro");
+        System.out.println("____________apartado de clientes____________");
+        System.out.println("6. Crear cliente");
+        System.out.println("7. Listar todos los clientes");
+        System.out.println("8. Buscar cliente por cédula");
+        System.out.println("9. Actualizar cliente");
+        System.out.println("10. Borrar cliente");
+        System.out.println("____________apartado de prestamos____________");
+        System.out.println("11. Registrar prestamo");
+        System.out.println("12. Registrar devolución");
+        System.out.println("13. Listar préstamos");
+        System.out.println("\n0. Salir");
+        System.out.println("___________________________________________________");
+        System.out.print("Seleccione una opción: ");
+
+        if (sc.hasNextInt()) {
+            opcion = sc.nextInt();
+            sc.nextLine(); //por esto me dio dolor de cabeza
+
+            switch (opcion) {
+                case 1:
+                    agregarLibro();
+                    break;
+                case 2:
+                    leerLibro();
+                    break;
+                case 3:
+                    buscar();
+                    break;
+                case 4:
+                    actualizarL();
+                    break;
+                case 5:
+                    eliminarLibro();
+                    break;
+                case 6:
+                    crearCliente();
+                    break;
+                case 7:
+                    leerCliente();
+                    break;
+                case 8:
+                    leerBuscarCliente();
+                    break;
+                case 9:
+                    actualizar();
+                    break;
+                case 10:
+                    borrarCliente();
+                    break;
+                case 11:
+                    crearPrestamo();
+                    break;
+                case 12:
+                    devolucion();
+                    break;
+                case 13:
+                    listarPrestamos();
+                    break;
+                case 0:
+                    System.out.println("saliendo es saliendo");
+                    break;
+                default:
+                    System.out.println("opción no valida, Intente de nuevo");
+            }
+        } else {
+            System.out.println("pon un numero bueno ombe");
+            sc.nextLine(); 
+        }
+
+    } while (opcion != 0);
 }
 //_____________________________________metodos del libro_____________________________________
 //agregar libro
