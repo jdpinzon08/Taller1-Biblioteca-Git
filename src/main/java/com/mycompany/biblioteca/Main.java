@@ -300,7 +300,19 @@ public static void devolucion() {
     System.out.println("no se encontro ningun prestamo con ese id");
 }
 
+//listar todos los prestamos
+public static void listarPrestamos() {
+    if (prestamos.isEmpty()) {
+        System.out.println("ta vacio, no hay prestamos registrados");
+        return;
+    }
 
+    System.out.println("_____lista de prestamo_____");
+    for (int i = 0; i < prestamos.size(); i++) {
+        Prestamo p = prestamos.get(i);
+        System.out.println((i + 1) + "ID: " + p.getIdPrestamo() + " Cliente: " + p.getCliente().getNombre() + " Libro: " + p.getLibro().getNombre() + " Fecha: " + p.getFecha() + " Estado: " + p.getEstado());
+    }
+}
 
 
 }
